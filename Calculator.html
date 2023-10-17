@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #calculator {
+      width: 200px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 5px;
+    }
+
+    #result {
+      grid-column: 1 / span 4;
+      height: 50px;
+      border: 1px solid #ccc;
+      margin-bottom: 5px;
+      text-align: right;
+      padding: 5px;
+      font-size: 20px;
+    }
+
+    button {
+      height: 40px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div id="calculator">
+    <div id="result">
+      <input type="text" id="display" value="" readonly>
+    </div>
+    <button class="number" onclick="appendToDisplay('9')">9</button>
+    <button class="number" onclick="appendToDisplay('8')">8</button>
+    <button class="number" onclick="appendToDisplay('7')">7</button>
+    <button class="operator" onclick="appendToDisplay('+')">+</button>
+    <button class="number" onclick="appendToDisplay('4')">4</button>
+    <button class="number" onclick="appendToDisplay('5')">5</button>
+    <button class="number" onclick="appendToDisplay('6')">6</button>
+    <button class="operator" onclick="appendToDisplay('-')">-</button>
+    <button class="number" onclick="appendToDisplay('1')">1</button>
+    <button class="number" onclick="appendToDisplay('2')">2</button>
+    <button class="number" onclick="appendToDisplay('3')">3</button>
+    <button class="operator" onclick="appendToDisplay('/')">/</button>
+    <button class="number" onclick="appendToDisplay('.')">.</button>
+    <button class="number" onclick="appendToDisplay('0')">0</button>
+    <button id="equals" class="operator" onclick="calculate()">=</button>
+    <button id="ac" class="operator" onclick="clearDisplay()">AC</button>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+    let currentInput = "";
+
+    function clearDisplay() {
+      currentInput = "";
+      display.value = "";
+    }
+
+    function appendToDisplay(value) {
+      currentInput += value;
+      display.value = currentInput;
+    }
+
+    function calculate() {
+      try {
+        currentInput = eval(currentInput);
+        display.value = currentInput;
+      } catch (error) {
+        display.value = "Error";
+      }
+    }
+  </script>
+</body>
+</html>
